@@ -20,7 +20,7 @@ case class TypeNotFound(message: String)               extends EvaluationError(m
 case class ResultDoesNotMatchType(message: String)     extends EvaluationError(message)
 case class FunctionReturnedToTopLevel(message: String) extends EvaluationError(message)
 case class UnsupportedTypeParameter(message: String)   extends EvaluationError(message)
-case class UnsupportedType(message: String)            extends EvaluationError(message)
+case class UnsupportedType(message: String)            extends TypeError(message)
 case class NotImplemented(message: String)             extends EvaluationError(message)
 
-case class TooManyArgs(message: String) extends EvaluationError(message)
+case class TooManyArgs(message: String) extends TypeError(message)
