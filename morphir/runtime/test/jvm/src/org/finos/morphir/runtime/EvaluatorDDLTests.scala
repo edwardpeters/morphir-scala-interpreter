@@ -1,26 +1,27 @@
-package org.finos.morphir
-package runtime
+package org.finos.morphir.runtime
 
 import org.finos.morphir.testing.MorphirBaseSpec
-import zio.{Console, Task, ZIO}
+import zio.{Console, Task, ZIO, ZLayer}
 import zio.test.{test, *}
 import org.finos.morphir.runtime.MorphirRuntime
 import org.finos.morphir.datamodel.{Data, Concept, Label, EnumLabel}
 import org.finos.morphir.datamodel.namespacing.Namespace.ns
 import org.finos.morphir.datamodel.namespacing.PackageName.root
 import org.finos.morphir.datamodel.Util.*
-import org.finos.morphir.ir.FQName
+import org.finos.morphir.ir.{FQName, Type}
 import org.finos.morphir.ir.conversion.*
 import org.finos.morphir.datamodel.Util.*
 import org.finos.morphir.datamodel.*
 
 object EvaluatorDDLTests extends MorphirBaseSpec {
-  val morphirRuntime =
-    for {
+  type MorphirRuntimeTyped = MorphirRuntime[Either, Unit, Type.UType]
+
+  val morphirRuntimeLayer: ZLayer[Any, Throwable, MorphirRuntime[Either, Unit, Type.UType]] =
+    ZLayer(for {
       irFilePath <- ZIO.succeed(os.pwd / "examples" / "morphir-elm-projects" / "evaluator-tests" / "morphir-ir.json")
       _          <- Console.printLine(s"Loading distribution from $irFilePath")
       dist       <- EvaluationLibrary.loadDistributionFromFileZIO(irFilePath.toString)
-    } yield MorphirRuntime.quick(dist)
+    } yield MorphirRuntime.quick(dist))
 
   def deriveData(input: Any): Data =
     input match {
@@ -31,19 +32,31 @@ object EvaluatorDDLTests extends MorphirBaseSpec {
       case other               => throw new Exception(s"Couldn't derive $other")
     }
 
-  def checkEvaluation(moduleName: String, functionName: String)(expected: => Data) =
+  def checkEvaluation(
+                       moduleName: String,
+                       functionName: String
+                     )(expected: => Data): ZIO[MorphirRuntimeTyped, Throwable, TestResult] =
     runTest(moduleName, functionName).map { actual =>
       assertTrue(actual == expected)
     }
 
-  def checkEvaluation(moduleName: String, functionName: String, value: Any)(expected: => Data) =
+  def checkEvaluation(
+                       moduleName: String,
+                       functionName: String,
+                       value: Any
+                     )(expected: => Data): ZIO[MorphirRuntimeTyped, Throwable, TestResult] =
     runTest(moduleName, functionName, value).map { actual =>
       assertTrue(actual == expected)
     }
 
-  def runTest(moduleName: String, functionName: String): Task[Data] = runTest(moduleName, functionName, ())
-  def runTest(moduleName: String, functionName: String, value: Any): Task[Data] =
-    morphirRuntime.flatMap { runtime =>
+  def runTest(moduleName: String, functionName: String): ZIO[MorphirRuntimeTyped, Throwable, Data] =
+    runTest(moduleName, functionName, ())
+  def runTest(
+               moduleName: String,
+               functionName: String,
+               value: Any
+             ): ZIO[MorphirRuntimeTyped, Throwable, Data] =
+    ZIO.serviceWithZIO[MorphirRuntimeTyped] { runtime =>
       val fullName = s"Morphir.Examples.App:$moduleName:$functionName"
       val data     = deriveData(value)
 
@@ -61,14 +74,14 @@ object EvaluatorDDLTests extends MorphirBaseSpec {
     (Label("name"), Data.String(name)),
     (Label("number"), Data.Int32(number))
   )
-//  val dogRecordConcept = Concept.Alias(
-//    qn"Morphir/Examples/App:RecordTests:RecordType",
-//    dogRecordConceptRaw
-//  )
-//  def dogRecordData(name: String, number: Int) = Data.Aliased(
-//    dogRecordDataRaw(name, number),
-//    dogRecordConcept
-//  )
+  //  val dogRecordConcept = Concept.Alias(
+  //    qn"Morphir/Examples/App:RecordTests:RecordType",
+  //    dogRecordConceptRaw
+  //  )
+  //  def dogRecordData(name: String, number: Int) = Data.Aliased(
+  //    dogRecordDataRaw(name, number),
+  //    dogRecordConcept
+  //  )
 
   def unionEnumShape: Concept.Enum = Concept.Enum(
     qn"Morphir/Examples/App:ConstructorTests:UnionType",
@@ -163,7 +176,7 @@ object EvaluatorDDLTests extends MorphirBaseSpec {
   )
 
   def spec =
-    suite("Json Evaluation")(
+    suite("Evaluator MDM Specs")(
       suite("Constructor Tests")(
         test("Zero Arg") {
           for {
@@ -380,11 +393,11 @@ object EvaluatorDDLTests extends MorphirBaseSpec {
         test("Add") {
           checkEvaluation("nativeReferenceTests", "nativeReferenceAddTest")(Data.Int(3))
         },
-//        test("Curried Log") {
-//          val actual   = runTest("nativeReferenceTests", "nativeReferenceCurriedLogTest")
-//          val expected = Double.PositiveInfinity
-//          assertTrue(actual == expected)
-//        }, //No DDL equivalent
+        //        test("Curried Log") {
+        //          val actual   = runTest("nativeReferenceTests", "nativeReferenceCurriedLogTest")
+        //          val expected = Double.PositiveInfinity
+        //          assertTrue(actual == expected)
+        //        }, //No DDL equivalent
         test("Pi") {
           checkEvaluation("nativeReferenceTests", "nativeReferencePiTest")(Data.Decimal(scala.BigDecimal("3")))
         }
@@ -544,5 +557,7 @@ object EvaluatorDDLTests extends MorphirBaseSpec {
           checkEvaluation("optionTests", "returnNoneIntTest")(Data.Optional.None(Concept.Int32))
         }
       )
-    ) @@ TestAspect.ignore @@ TestAspect.tag("Will re-enable when code-gen of a test are part of the pipeline")
+    ).provideLayerShared(morphirRuntimeLayer) /*@@ TestAspect.ignore @@ TestAspect.tag(
+      "Will re-enable when code-gen of a test are part of the pipeline"
+    )*/
 }

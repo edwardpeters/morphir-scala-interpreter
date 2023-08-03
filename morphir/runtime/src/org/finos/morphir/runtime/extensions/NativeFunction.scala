@@ -31,6 +31,11 @@ object NativeFunction {
     val arity = 2
     def apply[T: Numeric](a: T, b: T): T
   }
+
+  trait Comparison extends NativeFunction {
+    val arity = 2
+    def apply[T: Comparable](a: T, b: T): T
+  }
   trait NativeFunction1[T, R] extends NativeFunction with ((T) => R) {
     final val arity = 1
     def apply(arg: T): R
