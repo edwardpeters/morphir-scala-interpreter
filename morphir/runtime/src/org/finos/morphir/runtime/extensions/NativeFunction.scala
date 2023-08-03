@@ -1,19 +1,22 @@
 package org.finos.morphir.runtime.extensions
 object NativeFunction {
   sealed trait NativeFunction {
-    def fqName: FQName
+    val arity: Int
+    val  fqName: FQName
   }
   object NativeFunction{
     def apply[T, R](name : FQName, f : (T) => R): Unit ={
       new NativeFunction1{
-        def fqName: FQName = name
+        val arity = 1
+        val fqName: FQName = name
         def apply(arg: T): R = f(arg)
       }
     }
 
     def apply[T1, T2, R](name: FQName, f: (T1, T2) => R): Unit = {
       new NativeFunction2 {
-        def fqName: FQName = name
+        val arity = 2
+        val fqName: FQName = name
         def apply(arg1: T1, arg2 : T2): R = f(arg1, arg2)
       }
     }
