@@ -10,6 +10,13 @@ object NativeFunction {
         def apply(arg: T): R = f(arg)
       }
     }
+
+    def apply[T1, T2, R](name: FQName, f: (T1, T2) => R): Unit = {
+      new NativeFunction2 {
+        def fqName: FQName = name
+        def apply(arg1: T1, arg2 : T2): R = f(arg1, arg2)
+      }
+    }
   }
 
   trait NativeFunction1[T, R] extends NativeFunction with ((T) => R) {
