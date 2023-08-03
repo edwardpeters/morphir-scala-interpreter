@@ -4,6 +4,7 @@ import V.Value
 import T.Type
 import org.finos.morphir.ir.{Name, QName, FQName}
 import org.finos.morphir.ir.Module.QualifiedModuleName
+import org.finos.morphir.ir.distribution.Distribution.Library
 import zio.Chunk
 
 /**
@@ -15,14 +16,21 @@ object Utils {
   def specificationToType[TA](spec: V.Specification[TA]): Type[TA] =
     curryTypeFunction(spec.output, spec.inputs)
 
-  def unCurryTypeFunction[TA](curried: Type[TA], args: List[Type[TA]]): Either[TypeError, Type[TA]] =
+  def unCurryTypeFunction(curried: Type[Unit], args: List[Type[Unit]], lib : Library): Either[TypeError, Type[Unit]] =
     (curried, args) match {
       case (Type.Function(attributes, parameterType, returnType), head :: tail) =>
         for {
           _           <- typeCheck(parameterType, head)
-          appliedType <- unCurryTypeFunction(returnType, tail)
+          appliedType <- unCurryTypeFunction(returnType, tail, lib)
         } yield appliedType
       case (tpe, Nil)               => Right(tpe)
+      case (Type.Reference(attributes, typeName, typeArgs), args) => {//TODO: USE ARGS!
+        lib.lookupTypeSpecification(typeName.packagePath, typeName.modulePath, typeName.localName) match {
+          case Some(T.Specification.TypeAliasSpecification(typeParams, expr)) => unCurryTypeFunction(expr, args, lib)
+          case Some(other) => Left(UnsupportedType(s"Found type $other during uncurrying"))
+          case None => Left(TypeNotFound(s"Could not find type ${typeName.toString} during uncurrying"))
+        }
+      }
       case (nonFunction, head :: _) => Left(TooManyArgs(s"Tried to apply argument $head to non-function $nonFunction"))
     }
   // TODO: Implement

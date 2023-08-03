@@ -6,6 +6,7 @@ import org.finos.morphir.datamodel.Data
 import org.finos.morphir.ir.FQName
 import Utils.*
 import org.finos.morphir.ir.distribution.Distribution
+import org.finos.morphir.ir.distribution.Distribution.Library
 import org.finos.morphir.ir.conversion.*
 import org.finos.morphir.datamodel.Util.*
 import org.finos.morphir.datamodel.*
@@ -28,7 +29,7 @@ trait TypedMorphirRuntime extends MorphirRuntime[Either, scala.Unit, UType] {
     entryPoint match {
       case Value.Reference.Typed(tpe, entryName) =>
         for {
-          tpe <- unCurryTypeFunction(tpe, params.toList.map(_.attributes))
+          tpe <- unCurryTypeFunction(tpe, params.toList.map(_.attributes), getLibrary())
         } yield V.apply(tpe, entryPoint, params.head, params.tail: _*)
       case other => Left(UnsupportedType(s"Entry point must be a Reference, instead found $other"))
     }
@@ -44,4 +45,5 @@ trait TypedMorphirRuntime extends MorphirRuntime[Either, scala.Unit, UType] {
     val inputIR = toValue(params)
     evaluate(entryPoint, inputIR)
   }
+  def getLibrary() : Library
 }

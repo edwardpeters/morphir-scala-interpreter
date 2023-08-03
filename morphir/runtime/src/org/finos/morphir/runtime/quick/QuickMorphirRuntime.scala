@@ -45,14 +45,15 @@ private[runtime] case class QuickMorphirRuntime(library: Library, store: Store[s
       case None       => Left(new SpecificationNotFound(s"Could not find $ref during initial type building"))
     }
   }
+  def getLibrary() : Library = library
 
 }
+
 
 object QuickMorphirRuntime {
 
   def fromDistribution(distribution: Distribution): QuickMorphirRuntime = {
-    val library = distribution
-      .asInstanceOf[Library]
+    val library = distribution.asInstanceOf[Library]
     val store = Store.fromLibrary(library)
     QuickMorphirRuntime(library, store)
   }
