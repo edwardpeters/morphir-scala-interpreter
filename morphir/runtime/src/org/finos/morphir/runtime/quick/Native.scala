@@ -64,11 +64,7 @@ object String {
     FQName.fromString("Morphir.SDK:String:right")  -> right
   )
 }
-sealed trait NativeFunction{
-  def fqName : FQName
-}
 
-trait NativeFunction
 object Arithmetic{
   trait ArithmeticOp {
     def apply[T : Numeric](a : T, b : T) : T
