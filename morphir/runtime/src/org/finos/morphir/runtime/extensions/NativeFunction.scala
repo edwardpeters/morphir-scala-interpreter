@@ -2,7 +2,7 @@ package org.finos.morphir.runtime.extensions
 object NativeFunction {
   sealed trait NativeFunction {
     val arity: Int
-    val  fqName: FQName
+    val fqName: FQName
   }
   object NativeFunction{
     def apply[T, R](name : FQName, f : (T) => R): Unit ={
@@ -11,11 +11,16 @@ object NativeFunction {
         def apply(arg: T): R = f(arg)
       }
     }
-
     def apply[T1, T2, R](name: FQName, f: (T1, T2) => R): Unit = {
       new NativeFunction2 {
         val fqName: FQName = name
         def apply(arg1: T1, arg2 : T2): R = f(arg1, arg2)
+      }
+    }
+    def apply[T1, T2, T3, R](name: FQName, f: (T1, T2, T3) => R): Unit = {
+      new NativeFunction2 {
+        val fqName: FQName = name
+        def apply(arg1: T1, arg2: T2, arg3 : T3): R = f(arg1, arg2, arg3)
       }
     }
   }
@@ -24,7 +29,6 @@ object NativeFunction {
     val arity = 2
     def apply[T: Numeric](a: T, b: T): T
   }
-
   trait NativeFunction1[T, R] extends NativeFunction with ((T) => R) {
     final val arity = 1
     def apply(arg: T): R
