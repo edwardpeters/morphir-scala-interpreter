@@ -25,7 +25,7 @@ object Distribution {
       self match {
         case Library(`packageName`, _, packageDef) =>
           packageDef.toSpecification.modules.get(module)
-        case Library(_, _, _) => None
+        case Library(_, dependencies, _) => dependencies(packageName).lookupModuleSpecification(module.toPath)
       }
 
     def lookupTypeSpecification(pName: PackageName, module: QualifiedModuleName, localName: Name): Option[UTypeSpec] =
