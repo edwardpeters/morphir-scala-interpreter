@@ -168,6 +168,7 @@ object Native {
     val fqName = FQName.fromString("Morphir.SDK:Basics:subtract")
     def apply[T: Numeric](a: T, b: T): T = a - b
   }
+  object ModBy
 
 
   val native: Map[FQName, SDKValue[Unit, Type.UType]] = Map(
