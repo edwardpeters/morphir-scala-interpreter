@@ -1,4 +1,5 @@
 package org.finos.morphir.runtime.extensions
+import org.finos.morphir.ir.FQName
 object NativeFunction {
   sealed trait NativeFunction {
     val arity: Int

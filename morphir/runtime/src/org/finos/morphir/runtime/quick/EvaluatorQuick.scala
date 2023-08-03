@@ -27,6 +27,7 @@ object EvaluatorQuick {
   }
 
   type IntType = Long
+  type FloatType = Double
 
   // def evaluate[TA, VA](ir: Value[TA, VA], store: Store[TA, VA]): Any = Result.unwrap(Loop.loop(ir, store))
 
