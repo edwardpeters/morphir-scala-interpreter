@@ -65,11 +65,7 @@ object String {
   )
 }
 
-object Arithmetic{
-  trait ArithmeticOp {
-    def apply[T : Numeric](a : T, b : T) : T
-  }
-}
+
 
 
 object Native {
@@ -165,6 +161,8 @@ object Native {
     FQName.fromString("Morphir.SDK:Maybe:just")    -> just,
     FQName.fromString("Morphir.SDK:Maybe:nothing") -> nothing
   )
+
+
 
   val native: Map[FQName, SDKValue[Unit, Type.UType]] = Map(
     FQName.fromString("Morphir.SDK:Basics:and")      -> and,
