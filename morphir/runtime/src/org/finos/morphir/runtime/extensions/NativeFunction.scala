@@ -18,7 +18,7 @@ object NativeFunction {
       }
     }
     def apply[T1, T2, T3, R](name: FQName, f: (T1, T2, T3) => R): Unit = {
-      new NativeFunction2 {
+      new NativeFunction3 {
         val fqName: FQName = name
         def apply(arg1: T1, arg2: T2, arg3 : T3): R = f(arg1, arg2, arg3)
       }
@@ -55,3 +55,4 @@ parameterized:
   Can return Maybe, List, Maybe[List]
   Maybe taken by Result (only?)
 Generic return => ?
+**/
