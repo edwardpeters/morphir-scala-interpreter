@@ -2,8 +2,10 @@ package org.finos.morphir.runtime.quick
 
 import org.finos.morphir.ir.distribution.Distribution.Library
 import org.finos.morphir.ir.{FQName, Module, MorphirIRFile, Name, QName, Type}
+import org.finos.morphir.runtime.extensions.NativeFunction
+import org.finos.morphir.runtime.extensions.NativeFunction.*
 import org.finos.morphir.runtime.*
-import zio.Chunk
+import Numeric.Implicits.*
 
 import scala.io.Source
 
@@ -162,6 +164,10 @@ object Native {
     FQName.fromString("Morphir.SDK:Maybe:nothing") -> nothing
   )
 
+  val subtractOp = new ArithmeticOp{
+    val fqName = FQName.fromString("Morphir.SDK:Basics:subtract")
+    def apply[T: Numeric](a: T, b: T): T = a - b
+  }
 
 
   val native: Map[FQName, SDKValue[Unit, Type.UType]] = Map(
@@ -169,7 +175,7 @@ object Native {
     FQName.fromString("Morphir.SDK:Basics:or")       -> or,
     FQName.fromString("Morphir.SDK:Basics:pi")       -> pi,
     FQName.fromString("Morphir.SDK:Basics:add")      -> plus,
-    FQName.fromString("Morphir.SDK:Basics:subtract") -> subtract,
+    subtractOp.fqName -> Scratch.fromNative(subtractOp),
     FQName.fromString("Morphir.SDK:Basics:divide")   -> divide,
     FQName.fromString("Morphir.SDK:Basics:negate")   -> negate,
     FQName.fromString("Morphir.SDK:Basics:toFloat")  -> toFloat,

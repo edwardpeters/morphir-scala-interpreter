@@ -7,24 +7,25 @@ object NativeFunction {
   }
   object NativeFunction{
     def apply[T, R](name : FQName, f : (T) => R): Unit ={
-      new NativeFunction1{
+      new NativeFunction1[T, R]{
         val fqName: FQName = name
         def apply(arg: T): R = f(arg)
       }
     }
     def apply[T1, T2, R](name: FQName, f: (T1, T2) => R): Unit = {
-      new NativeFunction2 {
+      new NativeFunction2[T1, T2, R] {
         val fqName: FQName = name
         def apply(arg1: T1, arg2 : T2): R = f(arg1, arg2)
       }
     }
     def apply[T1, T2, T3, R](name: FQName, f: (T1, T2, T3) => R): Unit = {
-      new NativeFunction3 {
+      new NativeFunction3[T1, T2, T3, R] {
         val fqName: FQName = name
         def apply(arg1: T1, arg2: T2, arg3 : T3): R = f(arg1, arg2, arg3)
       }
     }
   }
+
 
   trait ArithmeticOp extends NativeFunction { //Do I want this to be a nativeFunction2? Kinda don't...
     val arity = 2
