@@ -5,10 +5,11 @@ import org.finos.morphir.ir.{FQName, Module, MorphirIRFile, Name, QName, Type}
 import org.finos.morphir.runtime.extensions.NativeFunction
 import org.finos.morphir.runtime.extensions.NativeFunction.*
 import org.finos.morphir.runtime.*
-import Numeric.Implicits.*
-import EvaluatorQuick.{IntType, FloatType}
-import math.Ordered.orderingToOrdered
 
+import Numeric.Implicits.*
+import EvaluatorQuick.{FloatType, IntType, resultAndConceptToData}
+
+import math.Ordered.orderingToOrdered
 import scala.io.Source
 
 object Dict {
@@ -166,7 +167,7 @@ object Native {
     FQName.fromString("Morphir.SDK:Maybe:nothing") -> nothing
   )
 
-  val subtractOp = new ArithmeticOp{
+  object SubractOp extends ArithmeticOp{
     val fqName = FQName.fromString("Morphir.SDK:Basics:subtract")
     def apply[T: Numeric](a: T, b: T): T = a - b
   }
@@ -180,10 +181,8 @@ object Native {
   object TupleFirst extends ParametricFunction {
     val fqName = FQName.fromString("Morphir.SDK:Tuple:first")
     val arity = 1
-
     def parametric[T] = new NativeFunction1[(T, _), T] {
-      val fqName = FQName.fromString("Morphir.SDK:BTupl:first")
-
+      val fqName = FQName.fromString("Morphir.SDK:Tuple:first")
       def apply(a: (T, _)): T = a._1
     }
   }
@@ -193,11 +192,9 @@ object Native {
     val arity = 2
     def apply[T : Ordering](a : T, b : T) : Boolean = a < b
   }
-
   object GreaterThan extends Comparison {
     val fqName = FQName.fromString("Morphir.SDK:Basics:greaterThan")
     val arity = 2
-
     def apply[T: Ordering](a: T, b: T): Boolean = a > b
   }
 
@@ -207,7 +204,7 @@ object Native {
     FQName.fromString("Morphir.SDK:Basics:or")       -> or,
     FQName.fromString("Morphir.SDK:Basics:pi")       -> pi,
     FQName.fromString("Morphir.SDK:Basics:add")      -> plus,
-    subtractOp.fqName -> Scratch.fromNative(subtractOp),
+    SubtractOp.fqName -> Scratch.fromNative(SubtractOp),
     ModBy.fqName -> Scratch.fromNative(ModBy),
     TupleFirst.fqName -> Scratch.fromNative(TupleFirst),
     LessThan.fqName -> Scratch.fromNative(LessThan),
