@@ -29,6 +29,7 @@ object EvaluatorDDLTests extends MorphirBaseSpec {
       case i: Int              => Deriver.toData(i)
       case s: String           => Deriver.toData(s)
       case (i: Int, s: String) => Data.Tuple(Deriver.toData(i), Deriver.toData(s))
+      case (a, b) => Data.Tuple(deriveData(a), deriveData(b))
       case other               => throw new Exception(s"Couldn't derive $other")
     }
 
@@ -402,7 +403,16 @@ object EvaluatorDDLTests extends MorphirBaseSpec {
           checkEvaluation("nativeReferenceTests", "nativeReferencePiTest")(Data.Decimal(scala.BigDecimal("3")))
         },
         test("ModBy"){
-          checkEvaluation("nativeReferenceTests", "nativeReferenceModByTest", 7)(Data.Int(2))
+          checkEvaluation("nativeReferenceTests", "nativeReferenceModByTest", 7)(Data.Int(1))
+        },
+        test("TupleFirst") {
+          checkEvaluation("nativeReferenceTests", "nativeReferenceTupleFirstTest", (4, 6))(Data.Int(4))
+        },
+        test("LessThan"){
+          checkEvaluation("nativeReferenceTests", "nativeReferenceLessThanTest", ((4, "Red"), (4, "Zebra")))(Data.Boolean(true))
+        },
+        test ("GreaterThanNested") {
+          checkEvaluation("nativeReferenceTests", "nativeReferenceGreaterThanNestedTest", ((4, ("Zebra", 5)), (4, ("Zebra", 1))))(Data.Boolean(true))
         }
       ),
       suite("Patern Matching")(
