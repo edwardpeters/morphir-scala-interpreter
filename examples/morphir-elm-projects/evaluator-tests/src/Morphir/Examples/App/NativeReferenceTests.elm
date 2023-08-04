@@ -1,4 +1,5 @@
 module Morphir.Examples.App.NativeReferenceTests exposing (..)
+import Tuple exposing (first)
 
 {-
     TODO:
@@ -47,8 +48,27 @@ nativeReferencePiTest _ =
 --expected = 3
 
 --Test: NativeReference/modBy
---import Basics exposing (pi)
 nativeReferenceModByTest : Int -> Int
 nativeReferenceModByTest x = 
     modBy 3 x
 --expected = x % 3
+
+--Test: NativeReference/TupleFirst
+nativeReferenceTupleFirstTest : (Int, Int) -> Int
+nativeReferenceTupleFirstTest x = 
+    first x
+--expected = x._1
+
+--Test: NativeReference/LessThan
+nativeReferenceLessThanTest : ((Int, String), (Int, String)) -> Bool
+nativeReferenceLessThanTest x = 
+    let (a, b) = x in
+    a < b
+--expected = x._1
+
+--Test: NativeReference/LessThan
+nativeReferenceGreaterThanNestedTest : ((Int, (String, Int)), (Int, (String, Int))) -> Bool
+nativeReferenceGreaterThanNestedTest x = 
+    let (a, b) = x in
+    a > b
+--expected = x._1
