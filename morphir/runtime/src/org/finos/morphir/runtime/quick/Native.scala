@@ -171,6 +171,23 @@ object Native {
     def apply[T: Numeric](a: T, b: T): T = a - b
   }
 
+
+  object ModBy extends NativeFunction2[IntType, IntType, IntType] {
+    val fqName = FQName.fromString("Morphir.SDK:Basics:modBy")
+    def apply(a: IntType, b: IntType): IntType = b % a
+  }
+
+  object TupleFirst extends ParametricFunction {
+    val fqName = FQName.fromString("Morphir.SDK:Tuple:first")
+    val arity = 1
+
+    def parametric[T] = new NativeFunction1[(T, _), T] {
+      val fqName = FQName.fromString("Morphir.SDK:BTupl:first")
+
+      def apply(a: (T, _)): T = a._1
+    }
+  }
+
   object LessThan extends Comparison{
     val fqName = FQName.fromString("Morphir.SDK:Basics:lessThan")
     val arity = 2
