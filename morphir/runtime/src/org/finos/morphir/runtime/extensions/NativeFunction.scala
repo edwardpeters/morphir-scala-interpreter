@@ -32,9 +32,10 @@ object NativeFunction {
     def apply[T: Numeric](a: T, b: T): T
   }
 
-  trait Comparison extends NativeFunction {
-    val arity = 2
-    def apply[T: Comparable](a: T, b: T): T
+  def first[T](tuple : (T, _)) : T = tuple._1
+  trait NativeFunctionTypeParam extends NativeFunction {
+    final val arity = 1
+
   }
   trait NativeFunction1[T, R] extends NativeFunction with ((T) => R) {
     final val arity = 1
@@ -48,7 +49,12 @@ object NativeFunction {
     final val arity = 3
     def apply(arg1: T1, arg2: T2, arg3: T3): R
   }
-  
+  trait ParametricFunction extends NativeFunction{
+    def parametric[T] : NativeFunction
+  }
+  trait Comparison extends NativeFunction{
+    def apply[T : Ordering](arg1 : T, arg2 : T) : Boolean
+  }
 }
 
 /**
