@@ -64,11 +64,11 @@ nativeReferenceLessThanTest : ((Int, String), (Int, String)) -> Bool
 nativeReferenceLessThanTest x = 
     let (a, b) = x in
     a < b
---expected = x._1
+--expected =
 
 --Test: NativeReference/LessThan
 nativeReferenceGreaterThanNestedTest : ((Int, (String, Int)), (Int, (String, Int))) -> Bool
 nativeReferenceGreaterThanNestedTest x = 
     let (a, b) = x in
     a > b
---expected = x._1
+--expected =
