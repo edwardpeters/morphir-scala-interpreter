@@ -6,6 +6,8 @@ import org.finos.morphir.runtime.extensions.NativeFunction
 import org.finos.morphir.runtime.extensions.NativeFunction.*
 import org.finos.morphir.runtime.*
 import Numeric.Implicits.*
+import EvaluatorQuick.{IntType, FloatType}
+import math.Ordered.orderingToOrdered
 
 import scala.io.Source
 
@@ -168,7 +170,19 @@ object Native {
     val fqName = FQName.fromString("Morphir.SDK:Basics:subtract")
     def apply[T: Numeric](a: T, b: T): T = a - b
   }
-  object ModBy
+
+  object LessThan extends Comparison{
+    val fqName = FQName.fromString("Morphir.SDK:Basics:lessThan")
+    val arity = 2
+    def apply[T : Ordering](a : T, b : T) : Boolean = a < b
+  }
+
+  object GreaterThan extends Comparison {
+    val fqName = FQName.fromString("Morphir.SDK:Basics:greaterThan")
+    val arity = 2
+
+    def apply[T: Ordering](a: T, b: T): Boolean = a > b
+  }
 
 
   val native: Map[FQName, SDKValue[Unit, Type.UType]] = Map(
@@ -177,11 +191,15 @@ object Native {
     FQName.fromString("Morphir.SDK:Basics:pi")       -> pi,
     FQName.fromString("Morphir.SDK:Basics:add")      -> plus,
     subtractOp.fqName -> Scratch.fromNative(subtractOp),
+    ModBy.fqName -> Scratch.fromNative(ModBy),
+    TupleFirst.fqName -> Scratch.fromNative(TupleFirst),
+    LessThan.fqName -> Scratch.fromNative(LessThan),
+    GreaterThan.fqName -> Scratch.fromNative(GreaterThan),
     FQName.fromString("Morphir.SDK:Basics:divide")   -> divide,
     FQName.fromString("Morphir.SDK:Basics:negate")   -> negate,
     FQName.fromString("Morphir.SDK:Basics:toFloat")  -> toFloat,
     FQName.fromString("Morphir.SDK:Basics:logBase")  -> log,
-    FQName.fromString("Morphir.SDK:Basics:lessThan") -> lessThan,
+    //FQName.fromString("Morphir.SDK:Basics:lessThan") -> lessThan,
     FQName.fromString("Morphir.SDK:List:cons")       -> cons,
     FQName.fromString("Morphir.SDK:List:concat")     -> concat,
     FQName.fromString("Morphir.SDK:List:map")        -> map
