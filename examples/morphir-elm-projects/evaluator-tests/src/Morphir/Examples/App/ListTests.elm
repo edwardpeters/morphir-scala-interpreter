@@ -68,8 +68,8 @@ listFlattenTest _ =
 --expected = ["Red","Blue","Car","Plane","Truck"]
 
 --Test: List/Filter
-listMapTest : () -> List Int
-listMapTest _ =
+listFilterTest : () -> List Int
+listFilterTest _ =
    filter (\x -> x > 3) [3,4,5]
 --expected = [4]
 

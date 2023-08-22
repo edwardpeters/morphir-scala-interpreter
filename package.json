@@ -16,6 +16,6 @@
     "trim": "0.0.3"
   },
   "devDependencies": {
-    "morphir-elm": "^2.81.0"
+    "morphir-elm": "^2.82.0"
   }
 }

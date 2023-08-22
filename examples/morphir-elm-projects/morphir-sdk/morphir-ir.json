@@ -1,0 +1,80 @@
+{
+    "formatVersion": 3,
+    "distribution": [
+        "Library",
+        [
+            [
+                "morphir"
+            ],
+            [
+                "s",
+                "d",
+                "k",
+                "impl"
+            ]
+        ],
+        [],
+        {
+            "modules": [
+                [
+                    [
+                        [
+                            "aggregate"
+                        ]
+                    ],
+                    {
+                        "access": "Public",
+                        "value": {
+                            "types": [
+                                [
+                                    [
+                                        "aggregate"
+                                    ],
+                                    {
+                                        "access": "Private",
+                                        "value": {
+                                            "doc": "",
+                                            "value": [
+                                                "TypeAliasDefinition",
+                                                [
+                                                    [
+                                                        "a"
+                                                    ],
+                                                    [
+                                                        "b"
+                                                    ]
+                                                ],
+                                                [
+                                                    "Tuple",
+                                                    {},
+                                                    [
+                                                        [
+                                                            "Variable",
+                                                            {},
+                                                            [
+                                                                "a"
+                                                            ]
+                                                        ],
+                                                        [
+                                                            "Variable",
+                                                            {},
+                                                            [
+                                                                "b"
+                                                            ]
+                                                        ]
+                                                    ]
+                                                ]
+                                            ]
+                                        }
+                                    }
+                                ]
+                            ],
+                            "values": [],
+                            "doc": null
+                        }
+                    }
+                ]
+            ]
+        }
+    ]
+}
