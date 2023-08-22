@@ -42,18 +42,18 @@ object GatherRefsSpec extends MorphirBaseSpec {
 
   def spec = suite("Exploration")(
     suite("From Distribution")(
-      test("Everything") {
+      test("Everything From Tests") {
         val stuff = GatherReferences.fromDistributions(dist)
         val defs = stuff.definitions.map(_.toString).mkString("\n")
         assertTrue(defs == "")
       },
-      test("SDK Defs") {
+      test("SDK Defs from Tests") {
         val stuff = GatherReferences.fromDistributions(dist)
         val defs = stuff.definitions.filter(_.getPackagePath == example.getPackagePath)
         val string = defs.map(_.toString).mkString("\n")
         assertTrue(string == "")
       },
-      test("SDK Defs from Mapping"){
+      test("SDK Defs from Matt Instrument"){
         val stuff = GatherReferences.fromDistributions(mattDist)
         val defs = stuff.definitions.filter(_.getPackagePath == example.getPackagePath)
         val string = defs.map(_.toString).mkString("\n")
@@ -65,7 +65,7 @@ object GatherRefsSpec extends MorphirBaseSpec {
         val string = defs.map(_.toString).mkString("\n")
         assertTrue(string == "")
       },
-      test("Missing Defs from Mapping") {
+      test("Missing SDK Defs from Matt's Instrument") {
         val stuff = GatherReferences.fromDistributions(mattDist)
         val defs = stuff.definitions.filter(_.getPackagePath == example.getPackagePath).diff(existing.toSet)
         val string = defs.map(_.toString).mkString("\n")
