@@ -2,6 +2,25 @@
     "name": "Morphir.SDKImpl",
     "sourceDirectory": "src",
     "exposedModules": [
-        "Aggregate"
+        "NativeTypes",
+        "Aggregate",
+        "Basics",
+        "Char",
+        "Decimal",
+        "Dict",
+        "Int",
+        "Key",
+        "List",
+        "LocalDate",
+        "Maybe",
+        "Month",
+        "Number",
+        "Regex",
+        "Result",
+        "Rule",
+        "Set",
+        "StatefulApp",
+        "String",
+        "Tuple"
     ]
 }

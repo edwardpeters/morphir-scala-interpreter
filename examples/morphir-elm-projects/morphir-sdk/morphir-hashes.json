@@ -1,3 +1,24 @@
 {
-    "src/Aggregate.elm": "9f3bce8fcc89ebc4dcbb0e48e5509f3c"
+    "src/Morphir/SDKImpl/Aggregate.elm": "fad4b214d3895b405cbf678879964546",
+    "src/Morphir/SDKImpl/Basics.elm": "81764a79abf7b5add4763a20b6bcf201",
+    "src/Morphir/SDKImpl/Char.elm": "928137d424426127c02583103117e5c3",
+    "src/Morphir/SDKImpl/Decimal.elm": "1f625b2efea0ce87cd609d93e47c5680",
+    "src/Morphir/SDKImpl/Dict.elm": "c0a18ad7c0b937ba6be41c5b79bc21b3",
+    "src/Morphir/SDKImpl/Int.elm": "4b4a9dac9736f5f354e3ff07184897c0",
+    "src/Morphir/SDKImpl/Key.elm": "8453eba6f762857455c2a031b5a3906d",
+    "src/Morphir/SDKImpl/List.elm": "beb0c37b62a21c41e6d079e3eb11062a",
+    "src/Morphir/SDKImpl/LocalDate.elm": "26b9d2c59037f394e154b2ec9b76fdf7",
+    "src/Morphir/SDKImpl/LocalTime.elm": "fc30791e453db5dfcb5d594bbe819c97",
+    "src/Morphir/SDKImpl/Maybe.elm": "e07e9d4ef822421638ff5500c87a4ee7",
+    "src/Morphir/SDKImpl/Month.elm": "1a84190804480b6c49e65082d49fed22",
+    "src/Morphir/SDKImpl/NativeTypes.elm": "acef79d4c076b35c382d892817cf0421",
+    "src/Morphir/SDKImpl/Number.elm": "92f0be2d70e99ca5eb1eb36ca81de116",
+    "src/Morphir/SDKImpl/Regex.elm": "f4778c64f3551e7c4022e216d5af6e70",
+    "src/Morphir/SDKImpl/Result.elm": "f6594a782be0fb4784b879d0efdd17ec",
+    "src/Morphir/SDKImpl/ResultList.elm": "9c9086f422aac665305624603a1e58ad",
+    "src/Morphir/SDKImpl/Rule.elm": "f783f4100d283da42b524d468a529659",
+    "src/Morphir/SDKImpl/Set.elm": "c6285062c7da348feee2bd7b599dd6f4",
+    "src/Morphir/SDKImpl/StatefulApp.elm": "8585c7869ce915f03f416f7951e6f6d0",
+    "src/Morphir/SDKImpl/String.elm": "59904d0aaa3b701bcd482a43d92108b9",
+    "src/Morphir/SDKImpl/Tuple.elm": "f55324bb7afd67b0614911b9d398daaa"
 }

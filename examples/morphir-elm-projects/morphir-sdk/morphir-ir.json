@@ -25,10 +25,70 @@
                     {
                         "access": "Public",
                         "value": {
+                            "types": [],
+                            "values": [],
+                            "doc": null
+                        }
+                    }
+                ],
+                [
+                    [
+                        [
+                            "basics"
+                        ]
+                    ],
+                    {
+                        "access": "Public",
+                        "value": {
+                            "types": [],
+                            "values": [],
+                            "doc": null
+                        }
+                    }
+                ],
+                [
+                    [
+                        [
+                            "char"
+                        ]
+                    ],
+                    {
+                        "access": "Public",
+                        "value": {
+                            "types": [],
+                            "values": [],
+                            "doc": null
+                        }
+                    }
+                ],
+                [
+                    [
+                        [
+                            "decimal"
+                        ]
+                    ],
+                    {
+                        "access": "Public",
+                        "value": {
+                            "types": [],
+                            "values": [],
+                            "doc": null
+                        }
+                    }
+                ],
+                [
+                    [
+                        [
+                            "dict"
+                        ]
+                    ],
+                    {
+                        "access": "Public",
+                        "value": {
                             "types": [
                                 [
                                     [
-                                        "aggregate"
+                                        "dict"
                                     ],
                                     {
                                         "access": "Private",
@@ -38,28 +98,51 @@
                                                 "TypeAliasDefinition",
                                                 [
                                                     [
-                                                        "a"
+                                                        "comparble"
                                                     ],
                                                     [
-                                                        "b"
+                                                        "v"
                                                     ]
                                                 ],
                                                 [
-                                                    "Tuple",
+                                                    "Reference",
                                                     {},
+                                                    [
+                                                        [
+                                                            [
+                                                                "morphir"
+                                                            ],
+                                                            [
+                                                                "s",
+                                                                "d",
+                                                                "k",
+                                                                "impl"
+                                                            ]
+                                                        ],
+                                                        [
+                                                            [
+                                                                "native",
+                                                                "types"
+                                                            ]
+                                                        ],
+                                                        [
+                                                            "native",
+                                                            "dict"
+                                                        ]
+                                                    ],
                                                     [
                                                         [
                                                             "Variable",
                                                             {},
                                                             [
-                                                                "a"
+                                                                "comparable"
                                                             ]
                                                         ],
                                                         [
                                                             "Variable",
                                                             {},
                                                             [
-                                                                "b"
+                                                                "v"
                                                             ]
                                                         ]
                                                     ]
@@ -69,6 +152,1260 @@
                                     }
                                 ]
                             ],
+                            "values": [
+                                [
+                                    [
+                                        "empty"
+                                    ],
+                                    {
+                                        "access": "Private",
+                                        "value": {
+                                            "doc": "",
+                                            "value": {
+                                                "inputTypes": [],
+                                                "outputType": [
+                                                    "Reference",
+                                                    {},
+                                                    [
+                                                        [
+                                                            [
+                                                                "morphir"
+                                                            ],
+                                                            [
+                                                                "s",
+                                                                "d",
+                                                                "k",
+                                                                "impl"
+                                                            ]
+                                                        ],
+                                                        [
+                                                            [
+                                                                "dict"
+                                                            ]
+                                                        ],
+                                                        [
+                                                            "dict"
+                                                        ]
+                                                    ],
+                                                    [
+                                                        [
+                                                            "Variable",
+                                                            {},
+                                                            [
+                                                                "comparable"
+                                                            ]
+                                                        ],
+                                                        [
+                                                            "Variable",
+                                                            {},
+                                                            [
+                                                                "v"
+                                                            ]
+                                                        ]
+                                                    ]
+                                                ],
+                                                "body": [
+                                                    "Apply",
+                                                    [
+                                                        "Reference",
+                                                        {},
+                                                        [
+                                                            [
+                                                                [
+                                                                    "morphir"
+                                                                ],
+                                                                [
+                                                                    "s",
+                                                                    "d",
+                                                                    "k",
+                                                                    "impl"
+                                                                ]
+                                                            ],
+                                                            [
+                                                                [
+                                                                    "dict"
+                                                                ]
+                                                            ],
+                                                            [
+                                                                "dict"
+                                                            ]
+                                                        ],
+                                                        [
+                                                            [
+                                                                "Variable",
+                                                                {},
+                                                                [
+                                                                    "comparable"
+                                                                ]
+                                                            ],
+                                                            [
+                                                                "Variable",
+                                                                {},
+                                                                [
+                                                                    "v"
+                                                                ]
+                                                            ]
+                                                        ]
+                                                    ],
+                                                    [
+                                                        "Reference",
+                                                        [
+                                                            "Function",
+                                                            {},
+                                                            [
+                                                                "Reference",
+                                                                {},
+                                                                [
+                                                                    [
+                                                                        [
+                                                                            "morphir"
+                                                                        ],
+                                                                        [
+                                                                            "s",
+                                                                            "d",
+                                                                            "k"
+                                                                        ]
+                                                                    ],
+                                                                    [
+                                                                        [
+                                                                            "list"
+                                                                        ]
+                                                                    ],
+                                                                    [
+                                                                        "list"
+                                                                    ]
+                                                                ],
+                                                                [
+                                                                    [
+                                                                        "Tuple",
+                                                                        {},
+                                                                        [
+                                                                            [
+                                                                                "Variable",
+                                                                                {},
+                                                                                [
+                                                                                    "t",
+                                                                                    "7"
+                                                                                ]
+                                                                            ],
+                                                                            [
+                                                                                "Variable",
+                                                                                {},
+                                                                                [
+                                                                                    "v"
+                                                                                ]
+                                                                            ]
+                                                                        ]
+                                                                    ]
+                                                                ]
+                                                            ],
+                                                            [
+                                                                "Reference",
+                                                                {},
+                                                                [
+                                                                    [
+                                                                        [
+                                                                            "morphir"
+                                                                        ],
+                                                                        [
+                                                                            "s",
+                                                                            "d",
+                                                                            "k",
+                                                                            "impl"
+                                                                        ]
+                                                                    ],
+                                                                    [
+                                                                        [
+                                                                            "dict"
+                                                                        ]
+                                                                    ],
+                                                                    [
+                                                                        "dict"
+                                                                    ]
+                                                                ],
+                                                                [
+                                                                    [
+                                                                        "Variable",
+                                                                        {},
+                                                                        [
+                                                                            "comparable"
+                                                                        ]
+                                                                    ],
+                                                                    [
+                                                                        "Variable",
+                                                                        {},
+                                                                        [
+                                                                            "v"
+                                                                        ]
+                                                                    ]
+                                                                ]
+                                                            ]
+                                                        ],
+                                                        [
+                                                            [
+                                                                [
+                                                                    "morphir"
+                                                                ],
+                                                                [
+                                                                    "s",
+                                                                    "d",
+                                                                    "k",
+                                                                    "impl"
+                                                                ]
+                                                            ],
+                                                            [
+                                                                [
+                                                                    "dict"
+                                                                ]
+                                                            ],
+                                                            [
+                                                                "from",
+                                                                "list"
+                                                            ]
+                                                        ]
+                                                    ],
+                                                    [
+                                                        "List",
+                                                        [
+                                                            "Reference",
+                                                            {},
+                                                            [
+                                                                [
+                                                                    [
+                                                                        "morphir"
+                                                                    ],
+                                                                    [
+                                                                        "s",
+                                                                        "d",
+                                                                        "k"
+                                                                    ]
+                                                                ],
+                                                                [
+                                                                    [
+                                                                        "list"
+                                                                    ]
+                                                                ],
+                                                                [
+                                                                    "list"
+                                                                ]
+                                                            ],
+                                                            [
+                                                                [
+                                                                    "Tuple",
+                                                                    {},
+                                                                    [
+                                                                        [
+                                                                            "Variable",
+                                                                            {},
+                                                                            [
+                                                                                "t",
+                                                                                "7"
+                                                                            ]
+                                                                        ],
+                                                                        [
+                                                                            "Variable",
+                                                                            {},
+                                                                            [
+                                                                                "v"
+                                                                            ]
+                                                                        ]
+                                                                    ]
+                                                                ]
+                                                            ]
+                                                        ],
+                                                        []
+                                                    ]
+                                                ]
+                                            }
+                                        }
+                                    }
+                                ],
+                                [
+                                    [
+                                        "from",
+                                        "list"
+                                    ],
+                                    {
+                                        "access": "Private",
+                                        "value": {
+                                            "doc": "",
+                                            "value": {
+                                                "inputTypes": [
+                                                    [
+                                                        [
+                                                            "l"
+                                                        ],
+                                                        [
+                                                            "Reference",
+                                                            {},
+                                                            [
+                                                                [
+                                                                    [
+                                                                        "morphir"
+                                                                    ],
+                                                                    [
+                                                                        "s",
+                                                                        "d",
+                                                                        "k"
+                                                                    ]
+                                                                ],
+                                                                [
+                                                                    [
+                                                                        "list"
+                                                                    ]
+                                                                ],
+                                                                [
+                                                                    "list"
+                                                                ]
+                                                            ],
+                                                            [
+                                                                [
+                                                                    "Tuple",
+                                                                    {},
+                                                                    [
+                                                                        [
+                                                                            "Variable",
+                                                                            {},
+                                                                            [
+                                                                                "comparble"
+                                                                            ]
+                                                                        ],
+                                                                        [
+                                                                            "Variable",
+                                                                            {},
+                                                                            [
+                                                                                "v"
+                                                                            ]
+                                                                        ]
+                                                                    ]
+                                                                ]
+                                                            ]
+                                                        ],
+                                                        [
+                                                            "Reference",
+                                                            {},
+                                                            [
+                                                                [
+                                                                    [
+                                                                        "morphir"
+                                                                    ],
+                                                                    [
+                                                                        "s",
+                                                                        "d",
+                                                                        "k"
+                                                                    ]
+                                                                ],
+                                                                [
+                                                                    [
+                                                                        "list"
+                                                                    ]
+                                                                ],
+                                                                [
+                                                                    "list"
+                                                                ]
+                                                            ],
+                                                            [
+                                                                [
+                                                                    "Tuple",
+                                                                    {},
+                                                                    [
+                                                                        [
+                                                                            "Variable",
+                                                                            {},
+                                                                            [
+                                                                                "comparble"
+                                                                            ]
+                                                                        ],
+                                                                        [
+                                                                            "Variable",
+                                                                            {},
+                                                                            [
+                                                                                "v"
+                                                                            ]
+                                                                        ]
+                                                                    ]
+                                                                ]
+                                                            ]
+                                                        ]
+                                                    ]
+                                                ],
+                                                "outputType": [
+                                                    "Reference",
+                                                    {},
+                                                    [
+                                                        [
+                                                            [
+                                                                "morphir"
+                                                            ],
+                                                            [
+                                                                "s",
+                                                                "d",
+                                                                "k",
+                                                                "impl"
+                                                            ]
+                                                        ],
+                                                        [
+                                                            [
+                                                                "dict"
+                                                            ]
+                                                        ],
+                                                        [
+                                                            "dict"
+                                                        ]
+                                                    ],
+                                                    [
+                                                        [
+                                                            "Variable",
+                                                            {},
+                                                            [
+                                                                "comparable"
+                                                            ]
+                                                        ],
+                                                        [
+                                                            "Variable",
+                                                            {},
+                                                            [
+                                                                "v"
+                                                            ]
+                                                        ]
+                                                    ]
+                                                ],
+                                                "body": [
+                                                    "Apply",
+                                                    [
+                                                        "Reference",
+                                                        {},
+                                                        [
+                                                            [
+                                                                [
+                                                                    "morphir"
+                                                                ],
+                                                                [
+                                                                    "s",
+                                                                    "d",
+                                                                    "k",
+                                                                    "impl"
+                                                                ]
+                                                            ],
+                                                            [
+                                                                [
+                                                                    "dict"
+                                                                ]
+                                                            ],
+                                                            [
+                                                                "dict"
+                                                            ]
+                                                        ],
+                                                        [
+                                                            [
+                                                                "Variable",
+                                                                {},
+                                                                [
+                                                                    "comparable"
+                                                                ]
+                                                            ],
+                                                            [
+                                                                "Variable",
+                                                                {},
+                                                                [
+                                                                    "v"
+                                                                ]
+                                                            ]
+                                                        ]
+                                                    ],
+                                                    [
+                                                        "Reference",
+                                                        [
+                                                            "Function",
+                                                            {},
+                                                            [
+                                                                "Reference",
+                                                                {},
+                                                                [
+                                                                    [
+                                                                        [
+                                                                            "morphir"
+                                                                        ],
+                                                                        [
+                                                                            "s",
+                                                                            "d",
+                                                                            "k"
+                                                                        ]
+                                                                    ],
+                                                                    [
+                                                                        [
+                                                                            "list"
+                                                                        ]
+                                                                    ],
+                                                                    [
+                                                                        "list"
+                                                                    ]
+                                                                ],
+                                                                [
+                                                                    [
+                                                                        "Tuple",
+                                                                        {},
+                                                                        [
+                                                                            [
+                                                                                "Variable",
+                                                                                {},
+                                                                                [
+                                                                                    "comparble"
+                                                                                ]
+                                                                            ],
+                                                                            [
+                                                                                "Variable",
+                                                                                {},
+                                                                                [
+                                                                                    "v"
+                                                                                ]
+                                                                            ]
+                                                                        ]
+                                                                    ]
+                                                                ]
+                                                            ],
+                                                            [
+                                                                "Reference",
+                                                                {},
+                                                                [
+                                                                    [
+                                                                        [
+                                                                            "morphir"
+                                                                        ],
+                                                                        [
+                                                                            "s",
+                                                                            "d",
+                                                                            "k",
+                                                                            "impl"
+                                                                        ]
+                                                                    ],
+                                                                    [
+                                                                        [
+                                                                            "dict"
+                                                                        ]
+                                                                    ],
+                                                                    [
+                                                                        "dict"
+                                                                    ]
+                                                                ],
+                                                                [
+                                                                    [
+                                                                        "Variable",
+                                                                        {},
+                                                                        [
+                                                                            "comparable"
+                                                                        ]
+                                                                    ],
+                                                                    [
+                                                                        "Variable",
+                                                                        {},
+                                                                        [
+                                                                            "v"
+                                                                        ]
+                                                                    ]
+                                                                ]
+                                                            ]
+                                                        ],
+                                                        [
+                                                            [
+                                                                [
+                                                                    "morphir"
+                                                                ],
+                                                                [
+                                                                    "s",
+                                                                    "d",
+                                                                    "k",
+                                                                    "impl"
+                                                                ]
+                                                            ],
+                                                            [
+                                                                [
+                                                                    "dict"
+                                                                ]
+                                                            ],
+                                                            [
+                                                                "from",
+                                                                "list"
+                                                            ]
+                                                        ]
+                                                    ],
+                                                    [
+                                                        "Variable",
+                                                        [
+                                                            "Reference",
+                                                            {},
+                                                            [
+                                                                [
+                                                                    [
+                                                                        "morphir"
+                                                                    ],
+                                                                    [
+                                                                        "s",
+                                                                        "d",
+                                                                        "k"
+                                                                    ]
+                                                                ],
+                                                                [
+                                                                    [
+                                                                        "list"
+                                                                    ]
+                                                                ],
+                                                                [
+                                                                    "list"
+                                                                ]
+                                                            ],
+                                                            [
+                                                                [
+                                                                    "Tuple",
+                                                                    {},
+                                                                    [
+                                                                        [
+                                                                            "Variable",
+                                                                            {},
+                                                                            [
+                                                                                "comparble"
+                                                                            ]
+                                                                        ],
+                                                                        [
+                                                                            "Variable",
+                                                                            {},
+                                                                            [
+                                                                                "v"
+                                                                            ]
+                                                                        ]
+                                                                    ]
+                                                                ]
+                                                            ]
+                                                        ],
+                                                        [
+                                                            "l"
+                                                        ]
+                                                    ]
+                                                ]
+                                            }
+                                        }
+                                    }
+                                ],
+                                [
+                                    [
+                                        "singleton"
+                                    ],
+                                    {
+                                        "access": "Private",
+                                        "value": {
+                                            "doc": "",
+                                            "value": {
+                                                "inputTypes": [
+                                                    [
+                                                        [
+                                                            "key"
+                                                        ],
+                                                        [
+                                                            "Variable",
+                                                            {},
+                                                            [
+                                                                "comparable"
+                                                            ]
+                                                        ],
+                                                        [
+                                                            "Variable",
+                                                            {},
+                                                            [
+                                                                "comparable"
+                                                            ]
+                                                        ]
+                                                    ],
+                                                    [
+                                                        [
+                                                            "value"
+                                                        ],
+                                                        [
+                                                            "Variable",
+                                                            {},
+                                                            [
+                                                                "val"
+                                                            ]
+                                                        ],
+                                                        [
+                                                            "Variable",
+                                                            {},
+                                                            [
+                                                                "v"
+                                                            ]
+                                                        ]
+                                                    ]
+                                                ],
+                                                "outputType": [
+                                                    "Reference",
+                                                    {},
+                                                    [
+                                                        [
+                                                            [
+                                                                "morphir"
+                                                            ],
+                                                            [
+                                                                "s",
+                                                                "d",
+                                                                "k",
+                                                                "impl"
+                                                            ]
+                                                        ],
+                                                        [
+                                                            [
+                                                                "dict"
+                                                            ]
+                                                        ],
+                                                        [
+                                                            "dict"
+                                                        ]
+                                                    ],
+                                                    [
+                                                        [
+                                                            "Variable",
+                                                            {},
+                                                            [
+                                                                "comparable"
+                                                            ]
+                                                        ],
+                                                        [
+                                                            "Variable",
+                                                            {},
+                                                            [
+                                                                "val"
+                                                            ]
+                                                        ]
+                                                    ]
+                                                ],
+                                                "body": [
+                                                    "Apply",
+                                                    [
+                                                        "Reference",
+                                                        {},
+                                                        [
+                                                            [
+                                                                [
+                                                                    "morphir"
+                                                                ],
+                                                                [
+                                                                    "s",
+                                                                    "d",
+                                                                    "k",
+                                                                    "impl"
+                                                                ]
+                                                            ],
+                                                            [
+                                                                [
+                                                                    "dict"
+                                                                ]
+                                                            ],
+                                                            [
+                                                                "dict"
+                                                            ]
+                                                        ],
+                                                        [
+                                                            [
+                                                                "Variable",
+                                                                {},
+                                                                [
+                                                                    "comparable"
+                                                                ]
+                                                            ],
+                                                            [
+                                                                "Variable",
+                                                                {},
+                                                                [
+                                                                    "val"
+                                                                ]
+                                                            ]
+                                                        ]
+                                                    ],
+                                                    [
+                                                        "Reference",
+                                                        [
+                                                            "Function",
+                                                            {},
+                                                            [
+                                                                "Reference",
+                                                                {},
+                                                                [
+                                                                    [
+                                                                        [
+                                                                            "morphir"
+                                                                        ],
+                                                                        [
+                                                                            "s",
+                                                                            "d",
+                                                                            "k"
+                                                                        ]
+                                                                    ],
+                                                                    [
+                                                                        [
+                                                                            "list"
+                                                                        ]
+                                                                    ],
+                                                                    [
+                                                                        "list"
+                                                                    ]
+                                                                ],
+                                                                [
+                                                                    [
+                                                                        "Tuple",
+                                                                        {},
+                                                                        [
+                                                                            [
+                                                                                "Variable",
+                                                                                {},
+                                                                                [
+                                                                                    "comparable"
+                                                                                ]
+                                                                            ],
+                                                                            [
+                                                                                "Variable",
+                                                                                {},
+                                                                                [
+                                                                                    "val"
+                                                                                ]
+                                                                            ]
+                                                                        ]
+                                                                    ]
+                                                                ]
+                                                            ],
+                                                            [
+                                                                "Reference",
+                                                                {},
+                                                                [
+                                                                    [
+                                                                        [
+                                                                            "morphir"
+                                                                        ],
+                                                                        [
+                                                                            "s",
+                                                                            "d",
+                                                                            "k",
+                                                                            "impl"
+                                                                        ]
+                                                                    ],
+                                                                    [
+                                                                        [
+                                                                            "dict"
+                                                                        ]
+                                                                    ],
+                                                                    [
+                                                                        "dict"
+                                                                    ]
+                                                                ],
+                                                                [
+                                                                    [
+                                                                        "Variable",
+                                                                        {},
+                                                                        [
+                                                                            "comparable"
+                                                                        ]
+                                                                    ],
+                                                                    [
+                                                                        "Variable",
+                                                                        {},
+                                                                        [
+                                                                            "val"
+                                                                        ]
+                                                                    ]
+                                                                ]
+                                                            ]
+                                                        ],
+                                                        [
+                                                            [
+                                                                [
+                                                                    "morphir"
+                                                                ],
+                                                                [
+                                                                    "s",
+                                                                    "d",
+                                                                    "k",
+                                                                    "impl"
+                                                                ]
+                                                            ],
+                                                            [
+                                                                [
+                                                                    "dict"
+                                                                ]
+                                                            ],
+                                                            [
+                                                                "from",
+                                                                "list"
+                                                            ]
+                                                        ]
+                                                    ],
+                                                    [
+                                                        "List",
+                                                        [
+                                                            "Reference",
+                                                            {},
+                                                            [
+                                                                [
+                                                                    [
+                                                                        "morphir"
+                                                                    ],
+                                                                    [
+                                                                        "s",
+                                                                        "d",
+                                                                        "k"
+                                                                    ]
+                                                                ],
+                                                                [
+                                                                    [
+                                                                        "list"
+                                                                    ]
+                                                                ],
+                                                                [
+                                                                    "list"
+                                                                ]
+                                                            ],
+                                                            [
+                                                                [
+                                                                    "Tuple",
+                                                                    {},
+                                                                    [
+                                                                        [
+                                                                            "Variable",
+                                                                            {},
+                                                                            [
+                                                                                "comparable"
+                                                                            ]
+                                                                        ],
+                                                                        [
+                                                                            "Variable",
+                                                                            {},
+                                                                            [
+                                                                                "val"
+                                                                            ]
+                                                                        ]
+                                                                    ]
+                                                                ]
+                                                            ]
+                                                        ],
+                                                        [
+                                                            [
+                                                                "Tuple",
+                                                                [
+                                                                    "Tuple",
+                                                                    {},
+                                                                    [
+                                                                        [
+                                                                            "Variable",
+                                                                            {},
+                                                                            [
+                                                                                "comparable"
+                                                                            ]
+                                                                        ],
+                                                                        [
+                                                                            "Variable",
+                                                                            {},
+                                                                            [
+                                                                                "val"
+                                                                            ]
+                                                                        ]
+                                                                    ]
+                                                                ],
+                                                                [
+                                                                    [
+                                                                        "Variable",
+                                                                        [
+                                                                            "Variable",
+                                                                            {},
+                                                                            [
+                                                                                "comparable"
+                                                                            ]
+                                                                        ],
+                                                                        [
+                                                                            "key"
+                                                                        ]
+                                                                    ],
+                                                                    [
+                                                                        "Variable",
+                                                                        [
+                                                                            "Variable",
+                                                                            {},
+                                                                            [
+                                                                                "val"
+                                                                            ]
+                                                                        ],
+                                                                        [
+                                                                            "value"
+                                                                        ]
+                                                                    ]
+                                                                ]
+                                                            ]
+                                                        ]
+                                                    ]
+                                                ]
+                                            }
+                                        }
+                                    }
+                                ]
+                            ],
+                            "doc": null
+                        }
+                    }
+                ],
+                [
+                    [
+                        [
+                            "int"
+                        ]
+                    ],
+                    {
+                        "access": "Public",
+                        "value": {
+                            "types": [],
+                            "values": [],
+                            "doc": null
+                        }
+                    }
+                ],
+                [
+                    [
+                        [
+                            "key"
+                        ]
+                    ],
+                    {
+                        "access": "Public",
+                        "value": {
+                            "types": [],
+                            "values": [],
+                            "doc": null
+                        }
+                    }
+                ],
+                [
+                    [
+                        [
+                            "list"
+                        ]
+                    ],
+                    {
+                        "access": "Public",
+                        "value": {
+                            "types": [],
+                            "values": [],
+                            "doc": null
+                        }
+                    }
+                ],
+                [
+                    [
+                        [
+                            "local",
+                            "date"
+                        ]
+                    ],
+                    {
+                        "access": "Public",
+                        "value": {
+                            "types": [],
+                            "values": [],
+                            "doc": null
+                        }
+                    }
+                ],
+                [
+                    [
+                        [
+                            "maybe"
+                        ]
+                    ],
+                    {
+                        "access": "Public",
+                        "value": {
+                            "types": [],
+                            "values": [],
+                            "doc": null
+                        }
+                    }
+                ],
+                [
+                    [
+                        [
+                            "month"
+                        ]
+                    ],
+                    {
+                        "access": "Public",
+                        "value": {
+                            "types": [],
+                            "values": [],
+                            "doc": null
+                        }
+                    }
+                ],
+                [
+                    [
+                        [
+                            "native",
+                            "types"
+                        ]
+                    ],
+                    {
+                        "access": "Public",
+                        "value": {
+                            "types": [
+                                [
+                                    [
+                                        "native",
+                                        "dict"
+                                    ],
+                                    {
+                                        "access": "Public",
+                                        "value": {
+                                            "doc": "",
+                                            "value": [
+                                                "CustomTypeDefinition",
+                                                [
+                                                    [
+                                                        "comparable"
+                                                    ],
+                                                    [
+                                                        "v"
+                                                    ]
+                                                ],
+                                                {
+                                                    "access": "Private",
+                                                    "value": [
+                                                        [
+                                                            [
+                                                                "native",
+                                                                "dict"
+                                                            ],
+                                                            []
+                                                        ]
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            ],
+                            "values": [],
+                            "doc": null
+                        }
+                    }
+                ],
+                [
+                    [
+                        [
+                            "number"
+                        ]
+                    ],
+                    {
+                        "access": "Public",
+                        "value": {
+                            "types": [],
+                            "values": [],
+                            "doc": null
+                        }
+                    }
+                ],
+                [
+                    [
+                        [
+                            "regex"
+                        ]
+                    ],
+                    {
+                        "access": "Public",
+                        "value": {
+                            "types": [],
+                            "values": [],
+                            "doc": null
+                        }
+                    }
+                ],
+                [
+                    [
+                        [
+                            "result"
+                        ]
+                    ],
+                    {
+                        "access": "Public",
+                        "value": {
+                            "types": [],
+                            "values": [],
+                            "doc": null
+                        }
+                    }
+                ],
+                [
+                    [
+                        [
+                            "rule"
+                        ]
+                    ],
+                    {
+                        "access": "Public",
+                        "value": {
+                            "types": [],
+                            "values": [],
+                            "doc": null
+                        }
+                    }
+                ],
+                [
+                    [
+                        [
+                            "set"
+                        ]
+                    ],
+                    {
+                        "access": "Public",
+                        "value": {
+                            "types": [],
+                            "values": [],
+                            "doc": null
+                        }
+                    }
+                ],
+                [
+                    [
+                        [
+                            "stateful",
+                            "app"
+                        ]
+                    ],
+                    {
+                        "access": "Public",
+                        "value": {
+                            "types": [],
+                            "values": [],
+                            "doc": null
+                        }
+                    }
+                ],
+                [
+                    [
+                        [
+                            "string"
+                        ]
+                    ],
+                    {
+                        "access": "Public",
+                        "value": {
+                            "types": [],
+                            "values": [],
+                            "doc": null
+                        }
+                    }
+                ],
+                [
+                    [
+                        [
+                            "tuple"
+                        ]
+                    ],
+                    {
+                        "access": "Public",
+                        "value": {
+                            "types": [],
                             "values": [],
                             "doc": null
                         }
