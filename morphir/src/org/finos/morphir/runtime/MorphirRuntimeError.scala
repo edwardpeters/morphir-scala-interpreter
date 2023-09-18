@@ -13,6 +13,10 @@ import org.finos.morphir.ir.Literal.Lit
 import org.finos.morphir.ir.printing.{DetailLevel, PrintIR}
 import zio.Chunk
 
+implicit class PointHelper(val sc: StringContext) extends AnyVal {
+  def p(args: Any*): Point = ???
+}
+
 sealed abstract class MorphirRuntimeError(message: String) extends Exception(message)
 
 final case class DerivationError(message: String)        extends MorphirRuntimeError(message)
