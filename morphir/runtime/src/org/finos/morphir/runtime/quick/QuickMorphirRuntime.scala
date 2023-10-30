@@ -37,6 +37,8 @@ private[runtime] case class QuickMorphirRuntime(dists: Distributions, globals: G
       res <- evaluate(Value.Reference.Typed(tpe, entryPoint), param, params: _*)
     } yield res
 
+  def test() : RTAction[MorphirEnv, MorphirRuntimeError, Unit] =
+
   def evaluate(value: Value[TypeAttribs, ValueAttribs]): RTAction[MorphirEnv, MorphirRuntimeError, Data] =
     for {
       _   <- typeCheck(value)
