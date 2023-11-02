@@ -1,0 +1,11 @@
+{
+    "name": "Examples.UnitTesting",
+    "sourceDirectory": "src",
+    "localDependencies": [
+        "../test-framework/morphir-ir.json"
+    ],
+    "exposedModules": [
+        "SomeCode",
+        "SomeTests"
+    ]
+}

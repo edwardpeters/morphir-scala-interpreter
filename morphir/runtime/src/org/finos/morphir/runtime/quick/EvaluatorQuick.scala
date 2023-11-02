@@ -1,16 +1,17 @@
 package org.finos.morphir.runtime.quick
 
 import org.finos.morphir.datamodel.{Concept, Data, EnumLabel, Label}
-import org.finos.morphir.ir.Type.{Type => TT}
+import org.finos.morphir.ir.Type.Type as TT
 import org.finos.morphir.ir.Type
-import org.finos.morphir.ir.{Type => T, Value => V}
+import org.finos.morphir.ir.{Type as T, Value as V}
 import org.finos.morphir.ir.Value.*
 import org.finos.morphir.ir.distribution.Distribution
 import org.finos.morphir.naming.*
+import org.finos.morphir.runtime.SDKValue
 import org.finos.morphir.runtime.Extractors.*
 import org.finos.morphir.runtime.Extractors.Types.*
-import org.finos.morphir.runtime.TypedMorphirRuntimeDefs.{TypeAttribs, ValueAttribs}
-import org.finos.morphir.runtime.{Distributions, RTValue}
+import org.finos.morphir.runtime.TypedMorphirRuntimeDefs.{RuntimeDefinition, TypeAttribs, ValueAttribs}
+import org.finos.morphir.runtime.{Distributions, RTValue, TestResult}
 import org.finos.morphir.runtime.MorphirRuntimeError.*
 import org.finos.morphir.runtime.environment.MorphirEnv
 import org.finos.morphir.runtime.exports.*
@@ -21,6 +22,15 @@ import scala.collection.mutable
 
 object EvaluatorQuick {
   type FloatType = Double
+
+
+  private[runtime] def runTestsAction(
+                                       globals: GlobalDefs,
+                                       dists: Distributions
+                               ) : RTAction[MorphirEnv, EvaluationError, TestResult] =
+    RTAction.environmentWithPure[MorphirSdk] { env =>
+      RTAction.attempt(EvaluatorQuick.runTests(globals, dists)).refineToOrDie[EvaluationError]
+    }
 
   private[runtime] def evalAction(
       value: Value[TypeAttribs, ValueAttribs],
@@ -42,6 +52,20 @@ object EvaluatorQuick {
     // Run the evaluation loop
     val result = Loop(globals).loop(value, Store.empty)
     resultToMDM(result, concept)
+  }
+
+  private[runtime] def runTests(
+                             globals: GlobalDefs,
+                             dists: Distributions
+                           ): TestResult = {
+    val testType = T.reference("Morphir.Testing", "Test", "Test")
+    val tests = globals.definitions.collect{ //TODO: Improved test recognition (aliasing of return type, cleanup, ???)
+      case (fqn -> SDKValue.SDKValueDefinition(definition: RuntimeDefinition))
+        if (definition.inputTypes.isEmpty && definition.outputType == testType) =>
+        fqn
+    }.toList
+    val testResults = UnitTesting.runTests(globals, dists, "Example Test Suite", tests:_*)
+    testResults
   }
 
   def typeToConcept(tpe: Type.Type[Unit], dists: Distributions, boundTypes: Map[Name, Concept]): Concept =

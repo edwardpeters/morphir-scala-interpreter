@@ -18,6 +18,7 @@ import org.finos.morphir.datamodel.*
 
 import scala.util.{Failure, Success, Try}
 import org.finos.morphir.runtime.MorphirRuntimeError
+import org.finos.morphir.runtime.TestResult
 import org.finos.morphir.runtime.MorphirRuntimeError.*
 import org.finos.morphir.runtime.environment.MorphirEnv
 import zio.prelude.fx.ZPure
@@ -37,7 +38,7 @@ private[runtime] case class QuickMorphirRuntime(dists: Distributions, globals: G
       res <- evaluate(Value.Reference.Typed(tpe, entryPoint), param, params: _*)
     } yield res
 
-  def test() : RTAction[MorphirEnv, MorphirRuntimeError, Unit] =
+  def test() : RTAction[MorphirEnv, MorphirRuntimeError, TestResult] = EvaluatorQuick.runTestsAction(globals, dists)
 
   def evaluate(value: Value[TypeAttribs, ValueAttribs]): RTAction[MorphirEnv, MorphirRuntimeError, Data] =
     for {

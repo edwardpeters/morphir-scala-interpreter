@@ -1,0 +1,93 @@
+{
+    "formatVersion": 3,
+    "distribution": [
+        "Library",
+        [
+            [
+                "morphir"
+            ],
+            [
+                "testing"
+            ]
+        ],
+        [],
+        {
+            "modules": [
+                [
+                    [
+                        [
+                            "test"
+                        ]
+                    ],
+                    {
+                        "access": "Public",
+                        "value": {
+                            "types": [
+                                [
+                                    [
+                                        "test"
+                                    ],
+                                    {
+                                        "access": "Public",
+                                        "value": {
+                                            "doc": "",
+                                            "value": [
+                                                "CustomTypeDefinition",
+                                                [],
+                                                {
+                                                    "access": "Public",
+                                                    "value": [
+                                                        [
+                                                            [
+                                                                "assert"
+                                                            ],
+                                                            [
+                                                                [
+                                                                    [
+                                                                        "arg",
+                                                                        "1"
+                                                                    ],
+                                                                    [
+                                                                        "Reference",
+                                                                        {},
+                                                                        [
+                                                                            [
+                                                                                [
+                                                                                    "morphir"
+                                                                                ],
+                                                                                [
+                                                                                    "s",
+                                                                                    "d",
+                                                                                    "k"
+                                                                                ]
+                                                                            ],
+                                                                            [
+                                                                                [
+                                                                                    "basics"
+                                                                                ]
+                                                                            ],
+                                                                            [
+                                                                                "bool"
+                                                                            ]
+                                                                        ],
+                                                                        []
+                                                                    ]
+                                                                ]
+                                                            ]
+                                                        ]
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            ],
+                            "values": [],
+                            "doc": null
+                        }
+                    }
+                ]
+            ]
+        }
+    ]
+}
