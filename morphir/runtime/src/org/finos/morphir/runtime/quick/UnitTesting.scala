@@ -12,7 +12,8 @@ import org.finos.morphir.ir.Value.{
   USpecification as UValueSpec
 }
 import org.finos.morphir.ir.Type.{Field, Type, UType, USpecification as UTypeSpec}
-import org.finos.morphir.runtime.{RTValue, SDKConstructor, SDKValue, Utils, Extractors, Distributions, TestResult}
+import org.finos.morphir.runtime.{RTValue, SDKConstructor, SDKValue, Utils, Extractors, Distributions, TestResult, MorphirRuntimeError}
+import org.finos.morphir.ir.printing.PrintIR
 import Extractors.*
 
 object UnitTesting {
@@ -28,11 +29,31 @@ object UnitTesting {
     val evaluated = loop.loop(refValue, Store.empty)
     evaluated match{
       case RTValue.ConstructorResult(FQString("Morphir.Testing:Test:assert"), List(RTValue.Primitive.Boolean(true))) => TestResult.Success(testName.toString)
-      case RTValue.ConstructorResult(FQString("Morphir.Testing:Test:assert"), List(RTValue.Primitive.Boolean(false))) => TestResult.Failure(testName.toString, "Unrecognized assertion failure")
+      case RTValue.ConstructorResult(FQString("Morphir.Testing:Test:assert"), List(RTValue.Primitive.Boolean(false))) => formatFailure(globals, dists, testName.toString, refValue)
       case RTValue.ConstructorResult(otherName, _) => TestResult.Failure(testName.toString, s"Unrecognized constructor result: $otherName")
       case other => TestResult.Failure(testName.toString, s"Unrecognized value: ${other}")
 
     }
+  }
+
+
+  private def formatFailure(globals : GlobalDefs, dists : Distributions, testName : String, ir : TypedValue) : TestResult.Failure= {
+    ir match{
+      case Value.Reference(_, name)                     => {
+        val found = dists.lookupValueDefinition(name) match {
+          case Left(value) => throw value.withContext("Definition not found while formatting error")
+          case Right(value) => value
+        }
+        formatFailure(globals, dists, testName, found.body)
+      }
+      case Value.Apply(_, Value.Constructor(_, FQString("Morphir.Testing:Test:assert")), Value.Apply(_, Value.Apply(_, _, actual), expected)) => {
+        val loop = Loop(globals)
+        val actualEvaluated = loop.loop(actual, Store.empty)
+        val expectedEvaluated = loop.loop(expected, Store.empty)
+        TestResult.Failure(testName, s"${PrintIR(actualEvaluated)} != ${PrintIR(expectedEvaluated)}")
+      }
+      case other => throw MorphirRuntimeError.UnexpectedValue("Expected simple assert", other)
+      }
   }
 
 

@@ -32,6 +32,10 @@ object MorphirRuntimeError {
     def message = err"Record $value does not contain field ${field.toCamelCase}"
   }
 
+  final case class UnexpectedValue(description : String, found : Value[_, _]) extends EvaluationError{
+    def message = err"$description. Found $found"
+  }
+
   final case class UnexpectedType(expected: String, found: RTValue, hint: String = "") extends EvaluationError {
     def message = err"Expected $expected but found $found. ${if (hint != "") "Hint: " + hint else ""}"
   }
