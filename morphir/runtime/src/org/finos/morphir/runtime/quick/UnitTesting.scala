@@ -50,9 +50,12 @@ object UnitTesting {
         val loop = Loop(globals)
         val actualEvaluated = loop.loop(actual, Store.empty)
         val expectedEvaluated = loop.loop(expected, Store.empty)
-        TestResult.Failure(testName, s"${PrintIR(actualEvaluated)} != ${PrintIR(expectedEvaluated)}")
+        TestResult.Failure(testName,
+          s"""
+             |\t\t($actual != $expected)
+             |\t\t${PrintIR(actualEvaluated)} != ${PrintIR(expectedEvaluated)}""".stripMargin)
       }
-      case other => throw MorphirRuntimeError.UnexpectedValue("Expected simple assert", other)
+      case other => TestResult.Failure(testName, s"($ir) evaluated to false")
       }
   }
 
