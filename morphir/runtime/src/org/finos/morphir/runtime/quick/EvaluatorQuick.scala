@@ -23,11 +23,10 @@ import scala.collection.mutable
 object EvaluatorQuick {
   type FloatType = Double
 
-
   private[runtime] def runTestsAction(
-                                       globals: GlobalDefs,
-                                       dists: Distributions
-                               ) : RTAction[MorphirEnv, EvaluationError, TestResult] =
+      globals: GlobalDefs,
+      dists: Distributions
+  ): RTAction[MorphirEnv, EvaluationError, TestResult] =
     RTAction.environmentWithPure[MorphirSdk] { env =>
       RTAction.attempt(EvaluatorQuick.runTests(globals, dists)).refineToOrDie[EvaluationError]
     }
@@ -55,16 +54,16 @@ object EvaluatorQuick {
   }
 
   private[runtime] def runTests(
-                             globals: GlobalDefs,
-                             dists: Distributions
-                           ): TestResult = {
+      globals: GlobalDefs,
+      dists: Distributions
+  ): TestResult = {
     val testType = T.reference("Morphir.Testing", "Test", "Test")
-    val tests = globals.definitions.collect{ //TODO: Improved test recognition (aliasing of return type, cleanup, ???)
+    val tests = globals.definitions.collect { // TODO: Improved test recognition (aliasing of return type, cleanup, ???)
       case (fqn -> SDKValue.SDKValueDefinition(definition: RuntimeDefinition))
-        if (definition.inputTypes.isEmpty && definition.outputType == testType) =>
+          if (definition.inputTypes.isEmpty && definition.outputType == testType) =>
         fqn
     }.toList
-    val testResults = UnitTesting.runTests(globals, dists, "Example Test Suite", tests:_*)
+    val testResults = UnitTesting.runTests(globals, dists, "Example Test Suite", tests: _*)
     testResults
   }
 

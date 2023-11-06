@@ -10,12 +10,12 @@ object TestResult {
 
   case class Success(name: String) extends TestResult {
     override def isFailure: Boolean = false
-    override def toString = s"$name: SUCCESS"
+    override def toString           = s"$name: SUCCESS"
   }
 
   case class Failure(name: String, message: String) extends TestResult {
     override def isFailure: Boolean = true
-    override def toString = s"$name: FAILED - $message"
+    override def toString           = s"$name: FAILED - $message"
   }
 
   case class Suite(name: String, tests: List[TestResult]) extends TestResult {

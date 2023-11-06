@@ -5,7 +5,7 @@ import org.finos.morphir.datamodel.Util.*
 import org.finos.morphir.ir.Type
 import org.finos.morphir.naming.*
 import org.finos.morphir.runtime.environment.MorphirEnv
-import org.finos.morphir.runtime.{TestResult as MorphirTestResult}
+import org.finos.morphir.runtime.TestResult as MorphirTestResult
 import org.finos.morphir.testing.MorphirBaseSpec
 import zio.test.*
 import zio.test.TestAspect.{ignore, tag}
@@ -14,14 +14,17 @@ import zio.{Console, ZIO, ZLayer}
 object UnitTestingTests extends MorphirBaseSpec {
   val morphirRuntimeLayer: ZLayer[Any, Throwable, TypedMorphirRuntime] =
     ZLayer(for {
-     frameworkIRFilepath <- ZIO.succeed(os.pwd / "examples" / "morphir-elm-projects" / "evaluator-unit-test-framework" / "test-framework" / "morphir-ir.json")
-      _          <- Console.printLine(s"Loading unit test framework from $frameworkIRFilepath")
-      frameworkDist       <- EvaluationLibrary.loadDistributionFromFileZIO(frameworkIRFilepath.toString)
-     examplesIRFilepath <- ZIO.succeed(os.pwd / "examples" / "morphir-elm-projects" / "evaluator-unit-test-framework" / "unit-test-examples" / "morphir-ir.json")
-      _ <- Console.printLine(s"Loading examples from $examplesIRFilepath")
+      frameworkIRFilepath <- ZIO.succeed(
+        os.pwd / "examples" / "morphir-elm-projects" / "evaluator-unit-test-framework" / "test-framework" / "morphir-ir.json"
+      )
+      _             <- Console.printLine(s"Loading unit test framework from $frameworkIRFilepath")
+      frameworkDist <- EvaluationLibrary.loadDistributionFromFileZIO(frameworkIRFilepath.toString)
+      examplesIRFilepath <- ZIO.succeed(
+        os.pwd / "examples" / "morphir-elm-projects" / "evaluator-unit-test-framework" / "unit-test-examples" / "morphir-ir.json"
+      )
+      _            <- Console.printLine(s"Loading examples from $examplesIRFilepath")
       examplesDist <- EvaluationLibrary.loadDistributionFromFileZIO(examplesIRFilepath.toString)
     } yield MorphirRuntime.quick(frameworkDist, examplesDist))
-
 
   def deriveData(input: Any): Data =
     input match {
@@ -49,7 +52,7 @@ object UnitTestingTests extends MorphirBaseSpec {
     }
 
   def checkEvaluation(
-                       packageName: String,
+      packageName: String,
       moduleName: String,
       functionName: String
   )(expected: => Data): ZIO[TypedMorphirRuntime, Throwable, TestResult] =
@@ -58,18 +61,18 @@ object UnitTestingTests extends MorphirBaseSpec {
     }
 
   def runTest(
-               packageName: String,
-               moduleName: String,
-               functionName: String,
-               values: List[Any]
-             ): ZIO[TypedMorphirRuntime, Throwable, Data] =
+      packageName: String,
+      moduleName: String,
+      functionName: String,
+      values: List[Any]
+  ): ZIO[TypedMorphirRuntime, Throwable, Data] =
     ZIO.serviceWithZIO[TypedMorphirRuntime] { runtime =>
       val data = values.map(deriveData(_))
       runTestMDM(packageName, moduleName, functionName, data)
     }
 
   def checkEvaluation(
-      packageName : String,
+      packageName: String,
       moduleName: String,
       functionName: String,
       values: List[Any]
@@ -78,20 +81,23 @@ object UnitTestingTests extends MorphirBaseSpec {
       assertTrue(actual == expected)
     }
 
-  def testEval(label: String)(packageName : String, moduleName: String, functionName: String)(expected: => Data) =
+  def testEval(label: String)(packageName: String, moduleName: String, functionName: String)(expected: => Data) =
     test(label) {
       checkEvaluation(packageName, moduleName, functionName)(expected)
     }
 
-  def testEval(label: String)(packageName : String, moduleName: String, functionName: String, value: Any)(expected: => Data) =
+  def testEval(label: String)(
+      packageName: String,
+      moduleName: String,
+      functionName: String,
+      value: Any
+  )(expected: => Data) =
     test(label) {
       checkEvaluation(packageName, moduleName, functionName, List(value))(expected)
     }
 
-
-
   def runTestMDM(
-      packageName : String,
+      packageName: String,
       moduleName: String,
       functionName: String,
       data: List[Data]
@@ -111,7 +117,7 @@ object UnitTestingTests extends MorphirBaseSpec {
     }
 
   def runUnitTests(
-                ): ZIO[TypedMorphirRuntime, Throwable, MorphirTestResult] =
+  ): ZIO[TypedMorphirRuntime, Throwable, MorphirTestResult] =
     ZIO.serviceWithZIO[TypedMorphirRuntime] { runtime =>
       runtime.test()
         .provideEnvironment(MorphirEnv.live)
@@ -123,11 +129,9 @@ object UnitTestingTests extends MorphirBaseSpec {
       assertTrue(actual.toString == "")
     }
 
-  def testTests(label : String) = test(label){
+  def testTests(label: String) = test(label) {
     checkUnitTesting()
   }
-
-
 
   def spec =
     suite("Unit Testing Direct Tests")(
@@ -138,7 +142,7 @@ object UnitTestingTests extends MorphirBaseSpec {
 //      ),
       suite("Basic Tests")(
         testTests("Basic unit testing")
-      ),
+      )
     ).provideLayerShared(morphirRuntimeLayer)
 
 }
