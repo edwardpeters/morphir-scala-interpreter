@@ -436,6 +436,7 @@ object RTValue {
       s"${name.toString}(${values.map(value => value.succinct(depth - 1)).mkString(", ")})"
     }
   }
+  case object GT extends ConstructorResult(fqn"Morphir.SDK:Basics:GT", List())
 
   sealed trait NativeFunctionResult extends Function {
     def arguments: Int
