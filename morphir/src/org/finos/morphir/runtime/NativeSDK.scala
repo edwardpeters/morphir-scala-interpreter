@@ -47,6 +47,8 @@ object NativeSDK {
           NativeFunctionAdapter.Fun1(BasicsSDK.truncate),
           NativeFunctionAdapter.Fun2(BasicsSDK.integerDivide),
           NativeFunctionAdapter.Fun2(BasicsSDK.always),
+          NativeFunctionAdapter.Fun2(BasicsSDK.equal),
+          NativeFunctionAdapter.Fun2(BasicsSDK.notEqual),
           NativeFunctionAdapter.Fun2(BasicsSDK.lessThan),
           NativeFunctionAdapter.Fun2(BasicsSDK.greaterThan),
           NativeFunctionAdapter.Fun2(BasicsSDK.greaterThanOrEqual),

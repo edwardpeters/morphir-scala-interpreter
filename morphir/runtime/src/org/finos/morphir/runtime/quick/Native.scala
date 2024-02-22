@@ -408,10 +408,7 @@ object Native {
       RTValue.Primitive.Float(asDouble)
   }
 
-  val equal: SDKValue = SDKValue.SDKNativeFunction.fun2 {
-    (a: RTValue, b: RTValue) =>
-      RTValue.Primitive.Boolean(a == b)
-  }
+  
 
   val utc = java.time.ZoneId.of("UTC")
 
@@ -446,7 +443,6 @@ object Native {
   )
 
   val native: Map[FQName, SDKValue] = Map(
-    FQName.fromString("Morphir.SDK:Basics:equal")               -> equal,
     FQName.fromString("Morphir.SDK:Basics:and")                 -> and,
     FQName.fromString("Morphir.SDK:Basics:or")                  -> or,
     FQName.fromString("Morphir.SDK:Basics:not")                 -> not,
