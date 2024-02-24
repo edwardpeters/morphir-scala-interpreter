@@ -408,8 +408,6 @@ object Native {
       RTValue.Primitive.Float(asDouble)
   }
 
-  
-
   val utc = java.time.ZoneId.of("UTC")
 
   def fromMillisecondsEpoch(millis: Long): java.time.LocalTime =
