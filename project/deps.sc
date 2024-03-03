@@ -234,11 +234,11 @@ object Versions {
   val zio                        = "2.0.21"
   val `zio-cli`                  = "0.5.0"
   val `zio-config`               = "4.0.1"
-  val `zio-interop-cats`         = "23.1.0.0"
+  val `zio-interop-cats`         = "23.1.0.1"
   val `zio-json`                 = "0.6.2"
   val `zio-nio`                  = "2.0.2"
   val `zio-parser`               = "0.1.9"
-  val `zio-prelude`              = "1.0.0-RC22"
+  val `zio-prelude`              = "1.0.0-RC23"
   val `zio-process`              = "0.7.2"
   val `zio-schema`               = "0.4.12"
 }

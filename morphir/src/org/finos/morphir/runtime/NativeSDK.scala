@@ -15,6 +15,24 @@ object NativeSDK {
 
       implicit val packageName: PackageName = PackageName.fromString("Morphir.SDK")
 
+      case object Char extends SdkModuleDescriptor("Char") {
+        val functions: List[NativeFunctionAdapter] = scala.List(
+          NativeFunctionAdapter.Fun1(sdk.CharSDK.isUpper),
+          NativeFunctionAdapter.Fun1(sdk.CharSDK.isLower),
+          NativeFunctionAdapter.Fun1(sdk.CharSDK.isAlpha),
+          NativeFunctionAdapter.Fun1(sdk.CharSDK.isAlphaNum),
+          NativeFunctionAdapter.Fun1(sdk.CharSDK.isDigit),
+          NativeFunctionAdapter.Fun1(sdk.CharSDK.isOctDigit),
+          NativeFunctionAdapter.Fun1(sdk.CharSDK.isHexDigit),
+          NativeFunctionAdapter.Fun1(sdk.CharSDK.toUpper),
+          NativeFunctionAdapter.Fun1(sdk.CharSDK.toLower),
+          NativeFunctionAdapter.Fun1(sdk.CharSDK.toLocaleUpper),
+          NativeFunctionAdapter.Fun1(sdk.CharSDK.toLocaleLower),
+          NativeFunctionAdapter.Fun1(sdk.CharSDK.toCode),
+          NativeFunctionAdapter.Fun1(sdk.CharSDK.fromCode)
+        )
+      }
+
       case object String extends SdkModuleDescriptor("String") {
         val functions: List[NativeFunctionAdapter] = scala.List(
           NativeFunctionAdapter.Fun2(StringSDK.append),
@@ -47,6 +65,8 @@ object NativeSDK {
           NativeFunctionAdapter.Fun1(BasicsSDK.floor),
           NativeFunctionAdapter.Fun1(BasicsSDK.truncate),
           NativeFunctionAdapter.Fun2(BasicsSDK.integerDivide),
+          NativeFunctionAdapter.Fun1(BasicsSDK.isInfinite),
+          NativeFunctionAdapter.Fun1(BasicsSDK.isNaN),
           NativeFunctionAdapter.Fun2(BasicsSDK.always),
           NativeFunctionAdapter.Fun2(BasicsSDK.equal),
           NativeFunctionAdapter.Fun2(BasicsSDK.notEqual),
@@ -65,7 +85,8 @@ object NativeSDK {
           NativeFunctionAdapter.Fun2(BasicsSDK.modBy),
           NativeFunctionAdapter.Fun2(BasicsSDK.remainderBy),
           NativeFunctionAdapter.Fun1(BasicsSDK.sqrt),
-          NativeFunctionAdapter.Fun3(BasicsSDK.composeRight)
+          NativeFunctionAdapter.Fun3(BasicsSDK.composeRight),
+          NativeFunctionAdapter.Fun3(BasicsSDK.composeLeft)
         )
 
         private val enumSDKConstructor = SDKConstructor(scala.List())
@@ -216,6 +237,7 @@ object NativeSDK {
     import Morphir.SDK._
     Seq(
       Basics,
+      Char,
       Decimal,
       Dict,
       List,
