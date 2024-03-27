@@ -18,11 +18,13 @@ import org.finos.morphir.runtime.exports.*
 import org.finos.morphir.ir.printing.{DetailLevel, PrintIR}
 import org.finos.morphir.runtime.quick.GatherReferences
 import zio.Chunk
+import org.finos.morphir.ir.distribution.Distribution
 import org.finos.morphir.runtime.MorphirRuntimeError.*
 import TypeError.*
 
 object TypeChecker {
   type TypeCheckerResult = List[TypeError]
+  def apply(dists: Distribution*): TypeChecker = new TypeChecker(Distributions(dists: _*))
   // Object to carry data for making tracking local type bindings and context information for better error messages
   case class Context(
       typeBindings: Map[Name, UType],

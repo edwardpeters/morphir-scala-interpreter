@@ -32,7 +32,7 @@ object TypeCheckerTests extends MorphirBaseSpec {
       dist       <- EvaluationLibrary.loadDistributionFromFileZIO(irFilePath.toString)
       unitTestDist <-
         EvaluationLibrary.loadDistributionFromFileZIO("morphir-elm/sdks/morphir-unit-test/morphir-ir.json")
-    } yield new TypeChecker(Distributions(dist, unitTestDist)))
+    } yield TypeChecker(dist, unitTestDist))
 
   def testTypeConforms(tpe1: UType, tpe2: UType)(expectedErrors: Int): ZIO[TypeChecker, Throwable, TestResult] =
     ZIO.serviceWithZIO[TypeChecker] { checker =>
