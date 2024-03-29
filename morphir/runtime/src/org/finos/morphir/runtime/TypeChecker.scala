@@ -121,16 +121,16 @@ final class TypeChecker(dists: Distributions) {
     loop(tpe, None, context)
   }
 
-  def checkAllDefinitions(): List[TypeError] =
+  def checkAllDefinitions(): Map[FQName, List[TypeError]] =
     GatherReferences.fromDistributionLibs(dists.getDists).definitions.toList.filter(
       !Utils.isNative(_)
-    ).flatMap(checkDefinitionBody(_))
+    ).map(fqn => fqn -> checkDefinitionBody(fqn)).filter(_._2.length > 0).toMap
 
   def checkDefinitionBody(fqn: FQName): List[TypeError] = {
     val maybeDefinition = dists.lookupValueDefinition(fqn)
     maybeDefinition match {
       case Left(error)       => List(error)
-      case Right(definition) => check(definition.body)
+      case Right(definition) => check(definition.body) //TODO: include variable types
     }
   }
 

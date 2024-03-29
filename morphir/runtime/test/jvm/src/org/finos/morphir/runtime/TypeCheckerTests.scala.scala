@@ -57,8 +57,8 @@ object TypeCheckerTests extends MorphirBaseSpec {
     ZIO.serviceWithZIO[TypeChecker] { checker =>
       for {
         errors <- ZIO.succeed(checker.checkAllDefinitions())
-        errorMsgs = errors.map(error => s"\n\t${error.getMessage}").mkString("")
-        assert <- if (errors.length == 0) assertCompletes
+        errorMsgs = errors.map{case (fqn, defErrors) => s"\n\t$fqn : ${defErrors(0).getMessage}"}.mkString("")
+        assert <- if (errors.size == 0) assertCompletes
         else assertTrue(errorMsgs == s"Expected no errors")
       } yield assert // TODO: Cleaner "fails" impl
     }
