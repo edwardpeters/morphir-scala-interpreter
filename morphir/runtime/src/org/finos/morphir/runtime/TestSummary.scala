@@ -3,7 +3,8 @@ import org.finos.morphir.naming.*
 
 case class TestSummary(
     report: String,
-    countsByModule: Map[(PackageName, ModuleName), TestResultCounts]
+    countsByModule: Map[(PackageName, ModuleName), TestResultCounts],
+    coverage : Float
 ) {
   def overallCounts = countsByModule.values.foldLeft(TestResultCounts.empty) { case (acc, next) => acc.plus(next) }
   def countsAtModule(pkgName: PackageName, modName: ModuleName): Option[TestResultCounts] =
@@ -25,6 +26,7 @@ case class TestSummary(
   override def toString =
     s"$report\n" +
       s"$overallCounts\n" +
+      s"coverage : $coverage\n" +
       s"Overal Status - $result"
 }
 
