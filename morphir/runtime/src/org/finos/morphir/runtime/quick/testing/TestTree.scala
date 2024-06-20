@@ -249,7 +249,8 @@ private[runtime] object TestSet {
   def toSummary(testSet: TestSet[SingleTestResult]) =
     TestSummary(
       toReport(testSet),
-      testSet.modules.map(module => (module.pkgName, module.modName) -> ModuleTests.getCounts(module)).toMap
+      testSet.modules.map(module => (module.pkgName, module.modName) -> ModuleTests.getCounts(module)).toMap,
+      0.0
     )
 
   /**

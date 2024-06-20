@@ -29,6 +29,7 @@ object UnitTesting {
   def testType        = T.reference("Morphir.UnitTest", "Test", "Test")
   def testResultType  = T.reference("Morphir.UnitTest", "Test", "TestTree[SingleTestResult]")
   def expectationType = T.reference("Morphir.UnitTest", "Expect", "Expectation")
+  def testPackagePath =  fqn"Morphir.UnitTest:Test:foo".packagePath
   def testPrefix      = "Morphir.UnitTest:Test:"
   def expectPrefix    = "Morphir.UnitTest:Expect:"
 
@@ -47,7 +48,7 @@ object UnitTesting {
       val testNames = collectTests(globals)
       val testIRs   = testNames.map(fqn => Value.Reference.Typed(testType, fqn))
       if (testIRs.isEmpty) {
-        val emptySummary = TestSummary("No tests run", Map())
+        val emptySummary = TestSummary("No tests run", Map(), 0.0)
         RTAction.succeed(emptySummary)
       } else {
         val testSuiteIR = if (testIRs.length == 1)
@@ -181,7 +182,12 @@ object UnitTesting {
     val withExpects = TestSet.getExpects(newGlobals, testSet)
     // And then the generated thunks are introspected, giving us our final SingleTestResults
     val withResults = TestSet.processExpects(newGlobals, withExpects)
-    TestSet.toSummary(withResults)
+    val withoutCoverage = TestSet.toSummary(withResults)
+    val counts = withoutCoverage.overallCounts
+    val nonTests =  collectNonTests(globals)
+    val withCoverage = withoutCoverage.copy(coverage = (counts.passed + counts.failed + counts.errors).toFloat /nonTests.length.toFloat)
+    println(s"DISCOVERED NON TESTS:\n\t ${nonTests.map(_.toString).mkString("\n\t")}")
+    withCoverage
   }
 
   /**
@@ -203,6 +209,38 @@ object UnitTesting {
         fqn
     }.toList
     tests
+  }
+
+  /**
+   * Collects all tests from the given distributions. A "Test" is any top-level definition of type `Test`. This exludes:
+   *   - Functions that result in Tests
+   *   - Lists, maps or tuples of Tests
+   *   - Things declared as an alias to type Test (intentional omission, in case users really want to hide tests for
+   *     whatever reason)
+   *
+   * @param globals
+   *   The global definitions to collect tests from
+   */
+  private[runtime] def collectNonTests(
+      globals: GlobalDefs
+  ): List[FQName]= {
+    globals.definitions.collect{
+      case (fqn -> SDKValueDefinition(definition : TypedDefinition)) if !containsTestCode(globals, fqn, definition) => fqn
+    }.toList
+
+  }
+
+  /**
+   * Checks if a given definition references any test-framework-specific code
+   */
+  private[runtime] def containsTestCode(
+    globals : GlobalDefs,
+    fqn : FQName,
+    definition : TypedDefinition
+  ) : Boolean = {
+    //TODO: This should do much more (recursively search tree/dealias to find if any references to test project exist)
+    fqn.packagePath == testPackagePath ||
+    definition.outputType == testType
   }
 
 }
