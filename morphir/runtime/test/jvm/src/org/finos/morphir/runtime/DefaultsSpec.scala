@@ -2,6 +2,8 @@ package org.finos.morphir.runtime
 
 import org.finos.morphir.datamodel.Util.*
 import org.finos.morphir.datamodel.*
+import org.finos.morphir.datamodel.scratch.*
+import org.finos.morphir.datamodel.scratch.Default.given
 import org.finos.morphir.ir.Type
 import org.finos.morphir.naming.*
 import org.finos.morphir.runtime.environment.MorphirEnv
@@ -58,6 +60,14 @@ object DefaultsTestingSpec extends MorphirBaseSpec {
             default <- MDMDefaults.default(largerConcept)
           } yield assertTrue(filled == larger)
         }
+      }
+    ),
+    suite("Fake Tests")(
+      test("Record matches Default") {
+        assertTrue(Default.default(FakeExamples.fakeTupleConcept) == FakeExamples.fakeTupleData)
+      },
+      test("Users can override leaf concepts") {
+        assertTrue(OtherDefault.otherDefault(FakeExamples.fakeTupleConcept) == FakeExamples.otherFakeTupleData)
       }
     )
   ).provideLayerShared(testLayer)
